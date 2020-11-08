@@ -1,15 +1,14 @@
 package com.noirix.repository.impl;
 
 import com.noirix.domain.Cars;
-import com.noirix.domain.Gender;
-import com.noirix.domain.User;
 import com.noirix.exception.EntityNotFoundException;
+import com.noirix.repository.CarsColumns;
 import com.noirix.repository.CarsRepository;
-import com.noirix.repository.UserRepository;
+import com.noirix.util.DatabaseConfig;
 import com.noirix.util.DatabasePropertiesReader;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,6 +23,7 @@ import static com.noirix.util.DatabasePropertiesReader.DATABASE_LOGIN;
 import static com.noirix.util.DatabasePropertiesReader.DATABASE_PASSWORD;
 import static com.noirix.util.DatabasePropertiesReader.DATABASE_URL;
 
+@Repository
 public class CarsRepositoryImpl implements CarsRepository {
 
     public static final DatabasePropertiesReader reader = DatabasePropertiesReader.getInstance();
@@ -118,12 +118,12 @@ public class CarsRepositoryImpl implements CarsRepository {
 
     private Cars parseResultSet(ResultSet rs) throws SQLException {
         Cars cars = new Cars();
-        cars.setId(rs.getLong(ID));
-        cars.setModel(rs.getString(MODEL));
-        cars.setCreation_year(rs.getInt(CREATION_YEAR));
-        cars.setUser_id(rs.getInt(USER_ID));
-        cars.setPrice(rs.getDouble(PRICE));
-        cars.setColor(rs.getString(COLOR));
+        cars.setId(rs.getLong(CarsColumns.ID));
+        cars.setModel(rs.getString(CarsColumns.MODEL));
+        cars.setCreation_year(rs.getInt(CarsColumns.CREATION_YEAR));
+        cars.setUser_id(rs.getInt(CarsColumns.USER_ID));
+        cars.setPrice(rs.getDouble(CarsColumns.PRICE));
+        cars.setColor(rs.getString(CarsColumns.COLOR));
         return cars;
     }
 

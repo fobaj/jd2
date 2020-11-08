@@ -1,6 +1,7 @@
 package com.noirix.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
-
+@Builder
 public class Cars {
 
     private Long id;
@@ -27,6 +28,13 @@ public class Cars {
     private Double price;
 
     private String color;
+
+    public Cars(Long id, String model, Integer creation_year, Integer user_id) {
+        this.id = id;
+        this.model = model;
+        this.creation_year = creation_year;
+        this.user_id = user_id;
+    }
 
     @Override
     public String toString() {
