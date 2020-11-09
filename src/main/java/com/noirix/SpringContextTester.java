@@ -4,26 +4,37 @@ import com.noirix.domain.Cars;
 import com.noirix.domain.User;
 import com.noirix.service.CarsService;
 import com.noirix.service.UserService;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.log4j.Logger;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
+//@Slf4j
 public class SpringContextTester {
+
+    private static final Logger log = Logger.getLogger(SpringContextTester.class);
+
     public static void main(String[] args) {
 
         AnnotationConfigApplicationContext annotationConfigApplicationContext = new AnnotationConfigApplicationContext("com.noirix");
 
         UserService userService = annotationConfigApplicationContext.getBean(UserService.class);
 
-        System.out.println(userService.findAll().stream().map(User::getName).collect(Collectors.joining(", ")));
+        log.info(userService.findAll().stream().map(User::getName).collect(Collectors.joining(", ")));
 
         CarsService carService = annotationConfigApplicationContext.getBean(CarsService.class);
 
-        System.out.println(carService.findAll().stream().map(Cars::getModel).collect(Collectors.joining(", ")));
+        log.info(carService.findAll().stream().map(Cars::getModel).collect(Collectors.joining(", ")));
 
-        System.out.println(carService.findById(7L));
+        log.info(carService.findById(7L).toString());
 
-        System.out.println(carService.search("OPEL"));
+        List<Cars> opel = carService.search("OPEL");
+
+        for (Cars cars : opel) {
+            log.info(cars.toString());
+        }
 
 
         Cars carForSave =
@@ -35,7 +46,7 @@ public class SpringContextTester {
                         .color("BLUE")
                         .build();
 
-        System.out.println(carService.save(carForSave));
+        log.info(carService.save(carForSave).toString());
 
     }
 }

@@ -3,6 +3,8 @@ package com.noirix.repository.impl;
 import com.noirix.domain.Cars;
 import com.noirix.repository.CarsColumns;
 import com.noirix.repository.CarsRepository;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -17,9 +19,12 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+//@Slf4j
 @Repository
 @Primary
 public class CarsRepositoryJdbcTemplateImpl implements CarsRepository {
+
+    private static final Logger log = Logger.getLogger(CarsRepositoryJdbcTemplateImpl.class);
 
     private JdbcTemplate jdbcTemplate;
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
@@ -31,6 +36,8 @@ public class CarsRepositoryJdbcTemplateImpl implements CarsRepository {
 
     @Override
     public List<Cars> search(String query) {
+        log.info("invoking search method");
+        log.info(query);
         return jdbcTemplate.query("select * from m_cars where name like ?", new Object[]{query}, this::getCarsRowMapper);
     }
 

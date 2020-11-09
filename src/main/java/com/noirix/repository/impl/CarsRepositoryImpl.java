@@ -4,8 +4,8 @@ import com.noirix.domain.Cars;
 import com.noirix.exception.EntityNotFoundException;
 import com.noirix.repository.CarsColumns;
 import com.noirix.repository.CarsRepository;
-import com.noirix.util.DatabaseConfig;
 import com.noirix.util.DatabasePropertiesReader;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
@@ -26,14 +26,9 @@ import static com.noirix.util.DatabasePropertiesReader.DATABASE_URL;
 @Repository
 public class CarsRepositoryImpl implements CarsRepository {
 
-    public static final DatabasePropertiesReader reader = DatabasePropertiesReader.getInstance();
+    private static final Logger log = Logger.getLogger(CarsRepositoryImpl.class);
 
-    private static final String ID = "id";
-    private static final String MODEL = "model";
-    private static final String CREATION_YEAR = "creation_year";
-    private static final String USER_ID = "user_id";
-    private static final String PRICE = "price";
-    private static final String COLOR = "color";
+    public static final DatabasePropertiesReader reader = DatabasePropertiesReader.getInstance();
 
     @Override
     public List<Cars> search(String query) {
@@ -51,7 +46,7 @@ public class CarsRepositoryImpl implements CarsRepository {
         try {
             Class.forName(reader.getProperty(DATABASE_DRIVER_NAME));
         } catch (ClassNotFoundException e) {
-            System.err.println("JDBC Driver Cannot be loaded!");
+            log.error("JDBC Driver Cannot be loaded!");
             throw new RuntimeException("JDBC Driver Cannot be loaded!");
         }
 

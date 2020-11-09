@@ -8,7 +8,6 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import javax.sql.DataSource;
 
-@Configuration
 public class ApplicationBeans {
 
     @Bean
