@@ -58,4 +58,5 @@ public class Friend {
                 ", surname='" + surname + '\'' +
                 '}';
     }
+
 }
