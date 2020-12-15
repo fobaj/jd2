@@ -46,10 +46,9 @@ public class OutputFriends {
         // Output a list of friends and friends of friends.
 
         recursion(friend2);
-
     }
 
-    // Method for creating friends.
+    // Method for creating friend.
 
     public static Friend createFriend (int id, String name, String surname) {
         Friend friend = new Friend();
@@ -59,38 +58,13 @@ public class OutputFriends {
         return friend;
     }
 
-    // Methods for creating a friend list.
+    // Method for creating a friend list.
 
-    public static List<Friend> createListOfFriends (Friend friend, Friend friend1) {
+    public static List<Friend> createListOfFriends (Friend friend, Friend ...friends) {
         List<Friend> friendList = new ArrayList<>();
-        friendList.add(friend1);
-        friend.setFriendList(friendList);
-        return friendList;
-    }
-
-    public static List<Friend> createListOfFriends (Friend friend, Friend friend1, Friend friend2) {
-        List<Friend> friendList = new ArrayList<>();
-        friendList.add(friend1);
-        friendList.add(friend2);
-        friend.setFriendList(friendList);
-        return friendList;
-    }
-
-    public static List<Friend> createListOfFriends (Friend friend, Friend friend1, Friend friend2, Friend friend3) {
-        List<Friend> friendList = new ArrayList<>();
-        friendList.add(friend1);
-        friendList.add(friend2);
-        friendList.add(friend3);
-        friend.setFriendList(friendList);
-        return friendList;
-    }
-
-    public static List<Friend> createListOfFriends (Friend friend, Friend friend1, Friend friend2, Friend friend3, Friend friend4) {
-        List<Friend> friendList = new ArrayList<>();
-        friendList.add(friend1);
-        friendList.add(friend2);
-        friendList.add(friend3);
-        friendList.add(friend4);
+        for (Friend x: friends) {
+            friendList.add(x);
+        }
         friend.setFriendList(friendList);
         return friendList;
     }
